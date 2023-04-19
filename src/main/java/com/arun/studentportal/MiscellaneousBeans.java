@@ -14,6 +14,7 @@ import java.util.Locale;
 @Configuration
 class MiscellaneousBeans {
 
+
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
