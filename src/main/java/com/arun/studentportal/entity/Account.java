@@ -14,6 +14,16 @@ public class Account {
     private String password;
     private String fullName;
 
+    private String studentId;
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
     public int getId() {
         return id;
     }
