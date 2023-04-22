@@ -2,6 +2,8 @@ package com.arun.studentportal.controller;
 
 import com.arun.studentportal.entity.Account;
 import com.arun.studentportal.service.AccountService;
+import com.arun.studentportal.service.CourseService;
+import com.arun.studentportal.service.EnrollmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,11 +12,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
+
 @Controller
 public class MainController {
 
   @Autowired
   AccountService accountService;
+
+  @Autowired
+  CourseService courseService;
+
+  @Autowired
+  EnrollmentService enrollmentService;
+
   @GetMapping("/login")
   public String login(Model model) {
     Account userDto = new Account();
@@ -47,22 +58,25 @@ public class MainController {
   }
 
   @GetMapping("/profile")
-  public String profile() {
+  public String profile(Model model) {
     return "profile";
   }
 
   @GetMapping("/courses")
-  public String courses() {
+  public String courses(Model model) {
+
+    model.addAttribute("list", courseService.list());
     return "courses";
   }
 
   @GetMapping("/graduation")
-  public String graduation() {
+  public String graduation(Model model) {
     return "graduation";
   }
 
   @GetMapping("/enroll")
-  public String enroll() {
+  public String enroll(Model model, Principal principal) {
+    model.addAttribute("list", enrollmentService.list());
     return "enroll";
   }
 

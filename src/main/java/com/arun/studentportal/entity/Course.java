@@ -12,6 +12,8 @@ public class Course {
     private String courseName;
     private float courseFee;
 
+    public Course() {
+    }
 
     public Course(String courseName, float courseFee) {
         this.courseName = courseName;
