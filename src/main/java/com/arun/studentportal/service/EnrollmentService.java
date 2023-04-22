@@ -14,7 +14,15 @@ public class EnrollmentService {
 
     @Autowired
     private EnrollmentRepository enrollmentRepository;
-    public List<Enrollment> list() {
-        return enrollmentRepository.findAll();
+    public List<Enrollment> list(String studentID) {
+        return enrollmentRepository.findByAccountId(studentID);
+    }
+
+    public Enrollment enrollCourse(String studentID, String courseId) {
+        Enrollment enrollment= new Enrollment();
+        enrollment.setCourseId(Integer.valueOf(courseId));
+        enrollment.setAccountId(studentID);
+        enrollmentRepository.save(enrollment);
+        return enrollment;
     }
 }

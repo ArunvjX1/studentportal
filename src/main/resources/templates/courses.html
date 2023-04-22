@@ -99,7 +99,7 @@
 
 
                             <tr th:each="data : ${list}">
-                                <td>Enrollment</td>
+                                <td><a th:href="@{/enrollcourse/{id}(id=${data.id})}">Enroll</a></td>
 
                                 <td th:text="${data.id}"></td>
                                 <td th:text="${data.courseName}"></td>

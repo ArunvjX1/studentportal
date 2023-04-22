@@ -7,10 +7,7 @@ import com.arun.studentportal.service.EnrollmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -76,8 +73,16 @@ public class MainController {
 
   @GetMapping("/enroll")
   public String enroll(Model model, Principal principal) {
-    model.addAttribute("list", enrollmentService.list());
+    model.addAttribute("list", enrollmentService.list("c1"));
     return "enroll";
   }
+
+  @GetMapping("/enrollcourse/{courseId}")
+  public String enroll(Model model, Principal principal, @PathVariable String courseId) {
+    model.addAttribute("list", enrollmentService.enrollCourse("c1", courseId));
+    return "redirect:/enroll";
+  }
+
+
 
 }
