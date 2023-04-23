@@ -24,4 +24,12 @@ public class AccountService {
         signup.setStudentId("c"+n);
         accountRepository.save(signup);
     }
+
+    public void updateStudent(String studentId, Account signup) {
+       Account student = accountRepository.findAccountByStudentId(studentId);
+        student.setPassword(signup.getPassword());
+        student.setFullName(signup.getFullName());
+        student.setUsername(signup.getUsername());
+        accountRepository.save(signup);
+    }
 }

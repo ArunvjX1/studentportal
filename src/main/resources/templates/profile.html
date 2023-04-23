@@ -29,7 +29,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">Logout</a></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
             </ul>
         </li>
     </ul>
@@ -85,26 +85,26 @@
                         DataTable Example
                     </div>
                     <div class="card-body">
-                        <form action="/signup" method="POST">
+                        <form th:action="@{/profile}" th:object="${student}" method="POST">
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="inputEmail" type="text" name="fullName" placeholder="arun123" />
+                                <input class="form-control" id="inputEmail" th:field=="${student.fullName}" type="text" name="fullName" placeholder="arun123" />
                                 <label for="inputEmail">Fullname</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="inputEmail" type="text" name="username" placeholder="arun123" />
+                                <input class="form-control" id="inputEmail" th:field=="${student.username}" type="text" name="username" placeholder="arun123" />
                                 <label for="inputEmail">Username</label>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" id="inputPassword" type="password" placeholder="Create a password" />
+                                        <input class="form-control" id="inputPassword" th:field=="${student.password}" type="password" placeholder="Create a password" />
                                         <label for="inputPassword">Password</label>
                                     </div>
                                 </div>
 
                             </div>
                             <div class="mt-4 mb-0">
-                                <div class="d-grid"><input type="submit" class="btn btn-primary btn-block">Update Account</input></div>
+                                <div class="d-grid"><input type="submit" class="btn btn-primary btn-block" value="Update Account"></div>
                             </div>
                         </form>
                     </div>

@@ -29,11 +29,11 @@ public class MainController {
     model.addAttribute("user", userDto);
     return "login";
   }
-//  @PostMapping("/login")
-//  public String loginProcess(@RequestBody Account login) {
-//    return "login";
-//  }
-//
+  @PostMapping("/login")
+  public String loginProcess(@RequestBody Account login) {
+    return "login";
+  }
+
 
   @GetMapping("/")
   public String home() {
@@ -43,21 +43,29 @@ public class MainController {
 
   @GetMapping("/signup")
   public String showRegistrationForm(Model model) {
-    Account userDto = new Account();
-    model.addAttribute("user", userDto);
+    model.addAttribute("student", new Account());
     return "signup";
   }
 
   @PostMapping("/signup")
-  public String signupProcess(@RequestBody Account signup) {
-    accountService.signupStudent(signup);
-    return "login";
+  public String signupProcess(@ModelAttribute Account student) {
+    accountService.signupStudent(student);
+    return "redirect:/login";
   }
 
   @GetMapping("/profile")
   public String profile(Model model) {
+    model.addAttribute("student", new Account());
+
     return "profile";
   }
+
+  @PostMapping("/profile")
+  public String profileProcess(@ModelAttribute Account student,Principal principal) {
+    accountService.updateStudent("c1", student);
+    return "redirect:/login";
+  }
+
 
   @GetMapping("/courses")
   public String courses(Model model) {
