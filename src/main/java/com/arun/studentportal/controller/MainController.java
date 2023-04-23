@@ -29,13 +29,13 @@ public class MainController {
     model.addAttribute("user", userDto);
     return "login";
   }
-  @PostMapping("/login")
+  @PostMapping({"/login", "/"})
   public String loginProcess(@RequestBody Account login) {
     return "login";
   }
 
 
-  @GetMapping("/")
+  @GetMapping("/home")
   public String home() {
     return "home";
   }
@@ -54,16 +54,16 @@ public class MainController {
   }
 
   @GetMapping("/profile")
-  public String profile(Model model) {
-    model.addAttribute("student", new Account());
+  public String profile(Model model,Principal principal) {
+    model.addAttribute("student", accountService.getStudent("c777315"));
 
     return "profile";
   }
 
   @PostMapping("/profile")
   public String profileProcess(@ModelAttribute Account student,Principal principal) {
-    accountService.updateStudent("c1", student);
-    return "redirect:/login";
+    accountService.updateStudent("c777315", student);
+    return "redirect:/profile";
   }
 
 
@@ -81,13 +81,13 @@ public class MainController {
 
   @GetMapping("/enroll")
   public String enroll(Model model, Principal principal) {
-    model.addAttribute("list", enrollmentService.list("c1"));
+    model.addAttribute("list", enrollmentService.list("c777315"));
     return "enroll";
   }
 
   @GetMapping("/enrollcourse/{courseId}")
   public String enroll(Model model, Principal principal, @PathVariable String courseId) {
-    model.addAttribute("list", enrollmentService.enrollCourse("c1", courseId));
+    model.addAttribute("list", enrollmentService.enrollCourse("c777315", courseId));
     return "redirect:/enroll";
   }
 

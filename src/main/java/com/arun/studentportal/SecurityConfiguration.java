@@ -42,7 +42,7 @@ public class SecurityConfiguration {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .loginProcessingUrl("/login")
+//                .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/home", true)
                 .failureUrl("/login?error=true")
                 .and()

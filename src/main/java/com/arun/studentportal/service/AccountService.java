@@ -14,6 +14,11 @@ public class AccountService {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    public Account getStudent(String studentId){
+        Account student = accountRepository.findAccountByStudentId(studentId);
+        return student;
+    }
     public void signupStudent(Account signup) {
 
         Random rand = new Random();
