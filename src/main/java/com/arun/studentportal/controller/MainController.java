@@ -55,14 +55,16 @@ public class MainController {
 
   @GetMapping("/profile")
   public String profile(Model model,Principal principal) {
-    model.addAttribute("student", accountService.getStudent("c777315"));
+    Account studentByUsername = accountService.getStudentByUsername(principal.getName());
+    model.addAttribute("student", accountService.getStudent(studentByUsername.getStudentId()));
 
     return "profile";
   }
 
   @PostMapping("/profile")
   public String profileProcess(@ModelAttribute Account student,Principal principal) {
-    accountService.updateStudent("c777315", student);
+    Account studentByUsername = accountService.getStudentByUsername(principal.getName());
+    accountService.updateStudent(studentByUsername.getStudentId(), student);
     return "redirect:/profile";
   }
 
@@ -81,13 +83,15 @@ public class MainController {
 
   @GetMapping("/enroll")
   public String enroll(Model model, Principal principal) {
-    model.addAttribute("list", enrollmentService.list("c777315"));
+    Account studentByUsername = accountService.getStudentByUsername(principal.getName());
+    model.addAttribute("list", enrollmentService.list(studentByUsername.getStudentId()));
     return "enroll";
   }
 
   @GetMapping("/enrollcourse/{courseId}")
   public String enroll(Model model, Principal principal, @PathVariable String courseId) {
-    model.addAttribute("list", enrollmentService.enrollCourse("c777315", courseId));
+    Account studentByUsername = accountService.getStudentByUsername(principal.getName());
+    model.addAttribute("list", enrollmentService.enrollCourse(studentByUsername.getStudentId(), courseId));
     return "redirect:/enroll";
   }
 
