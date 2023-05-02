@@ -18,4 +18,8 @@ public class CourseService {
     public List<Course> list() {
        return courseRepository.findAll();
     }
+
+    public Course findById(int id) {
+        return courseRepository.findById(id).get();
+    }
 }

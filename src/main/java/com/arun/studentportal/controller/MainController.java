@@ -1,9 +1,11 @@
 package com.arun.studentportal.controller;
 
 import com.arun.studentportal.entity.Account;
+import com.arun.studentportal.entity.Course;
 import com.arun.studentportal.service.AccountService;
 import com.arun.studentportal.service.CourseService;
 import com.arun.studentportal.service.EnrollmentService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -77,7 +79,10 @@ public class MainController {
   }
 
   @GetMapping("/graduation")
-  public String graduation(Model model) {
+  public String graduation(Model model,Principal principal) throws JsonProcessingException {
+    Account studentByUsername = accountService.getStudentByUsername(principal.getName());
+
+    model.addAttribute("isNotGraduate", accountService.isGraduate(studentByUsername.getStudentId()));
     return "graduation";
   }
 
@@ -91,7 +96,8 @@ public class MainController {
   @GetMapping("/enrollcourse/{courseId}")
   public String enroll(Model model, Principal principal, @PathVariable String courseId) {
     Account studentByUsername = accountService.getStudentByUsername(principal.getName());
-    model.addAttribute("list", enrollmentService.enrollCourse(studentByUsername.getStudentId(), courseId));
+    Course course = courseService.findById(Integer.parseInt(courseId));
+    model.addAttribute("list", enrollmentService.enrollCourse(studentByUsername.getStudentId(), courseId, course.getCourseFee()));
     return "redirect:/enroll";
   }
 

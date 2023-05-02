@@ -74,7 +74,9 @@
                 </ol>
                 <div class="card mb-4">
                     <div class="card-body">
-                        Gradation part is pending
+
+                        <span th:if="${isNotGraduate}">You have not graduate yet. Please pay all your pending invoice.</span>
+                        <span th:if="!${isNotGraduate}">You have Graduate Successfully.</span>
                     </div>
                 </div>
 
