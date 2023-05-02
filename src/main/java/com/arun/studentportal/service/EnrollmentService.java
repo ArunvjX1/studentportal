@@ -52,7 +52,7 @@ public class EnrollmentService {
         HttpEntity<Map<String, Object>> request = new HttpEntity<Map<String, Object>>(map, headers);
 
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.postForEntity( "http://localhost:8081/accounts/invoices", request , String.class );
+        ResponseEntity<String> response = restTemplate.postForEntity( "http://localhost:8081/invoices", request , String.class );
         //------
         return enrollment;
     }
