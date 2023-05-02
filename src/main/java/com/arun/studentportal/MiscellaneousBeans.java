@@ -26,9 +26,11 @@ class MiscellaneousBeans {
     CommandLineRunner initDatabase(CourseRepository courseRepository) {
         return args -> {
 
-//            courseRepository.save(new Course("SESC", 40l));
-//            courseRepository.save(new Course("PM", 10l));
-//            courseRepository.save(new Course("Cloud Computing", 10l));
+//            courseRepository.save(new Course("SESC", 90l));
+//            courseRepository.save(new Course("Project Management", 50l));
+//            courseRepository.save(new Course("Cloud Computing", 80l));
+//            courseRepository.save(new Course("Eco Engineering", 50l));
+//            courseRepository.save(new Course("Research Practice", 60l));
 
         };
     }

@@ -36,7 +36,7 @@ public class EnrollmentService {
 
         //------
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+       // headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         Map<String, Object> map= new HashMap<>();
 

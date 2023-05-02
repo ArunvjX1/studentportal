@@ -50,7 +50,6 @@ public class AccountService {
         {
 
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
             Map<String, Object> map= new HashMap<>();
 
@@ -60,7 +59,7 @@ public class AccountService {
             HttpEntity<Map<String, Object>> request = new HttpEntity<Map<String, Object>>(map, headers);
 
             RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<String> response = restTemplate.postForEntity( "http://localhost:8081/accounts", request , String.class );
+            ResponseEntity<Map> response = restTemplate.postForEntity( "http://localhost:8081/accounts", request , Map.class );
 
         }
         //------
@@ -68,7 +67,6 @@ public class AccountService {
         //------
         {
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
             Map<String, Object> map= new HashMap<>();
 
@@ -77,7 +75,7 @@ public class AccountService {
             HttpEntity<Map<String, Object>> request = new HttpEntity<Map<String, Object>>(map, headers);
 
             RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<String> response = restTemplate.postForEntity( "http://localhost:8081/api/register", request , String.class );
+            ResponseEntity<Map> response = restTemplate.postForEntity( "http://localhost:80/api/register", request , Map.class );
 
         }
         //------
@@ -94,7 +92,7 @@ public class AccountService {
 
     public boolean isGraduate(String studentId) throws JsonProcessingException {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+      //  headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         Map<String, Object> map= new HashMap<>();
 
@@ -102,11 +100,10 @@ public class AccountService {
         HttpEntity<Map<String, Object>> request = new HttpEntity<Map<String, Object>>(map, headers);
 
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.postForEntity( "http://localhost:8081/accounts/student/"+studentId, request , String.class );
+        ResponseEntity<Map> jsonpObjectMap = restTemplate.getForEntity( "http://localhost:8081/accounts/student/"+studentId , Map.class );
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map jsonpObjectMap = objectMapper.readValue(response.getBody(), Map.class);
-        boolean isNotGraduate = (boolean) jsonpObjectMap.get("hasOutstandingBalance");
+        Map responseBody = jsonpObjectMap.getBody();
+        boolean isNotGraduate = (boolean) responseBody.get("hasOutstandingBalance");
         return isNotGraduate;
     }
 }
